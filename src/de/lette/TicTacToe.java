@@ -8,51 +8,52 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+/**
+ * TicTacToe Servlet
+ * @author invalid
+ */
 @WebServlet("/TicTacToe")
 public class TicTacToe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	boolean player;
-	
-    public TicTacToe() {
-        super();
-    }
 
-    /**
-     * handle get request and session attributes
-     */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
+	/**
+	 * Handle get request paramters and session attributes
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		var session = request.getSession(true);
 
-		boolean player = false;
-		if(session.getAttribute("player") == null)
+		if (request.getParameter("reset") != null) {
+			session.removeAttribute("tictactoe");
+		}
+
+		var player = false;
+		if (session.getAttribute("player") == null) {
 			session.setAttribute("player", player);
-		else
+		} else {
 			player = (boolean) session.getAttribute("player");
-		
-		char[][] field = new char[3][3];
-		if(session.getAttribute("tictactoe") == null)
+		}
+
+		var field = new char[3][3];
+		if (session.getAttribute("tictactoe") == null) {
 			session.setAttribute("tictactoe", field);
-		else
+		} else {
 			field = (char[][]) session.getAttribute("tictactoe");
-		
-		if(request.getParameter("move") != null)
-		{
+		}
+
+		if (request.getParameter("move") != null) {
 			int move = Integer.parseInt(request.getParameter("move"));
-			int x = move/3;
-			int y = move%3;
-			
-			if(field[x][y] == '\0')
-			{
-				if(player)
+			int x = move / 3;
+			int y = move % 3;
+
+			if (field[x][y] == '\0') {
+				if (player)
 					field[x][y] = 'X';
 				else
 					field[x][y] = 'O';
 				session.setAttribute("player", !player);
-			}
-			else
-			{
+			} else {
 				System.out.println("Already set");
 			}
 		}
@@ -62,12 +63,15 @@ public class TicTacToe extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
-	private void printTicTacToe(PrintWriter writer, char[][] field)
-	{
+	/**
+	 * Prints the TicTacToe field as html
+	 */
+	private void printTicTacToe(PrintWriter writer, char[][] field) {
 		try {
 			writer.println("<!DOCTYPE html>");
 			writer.println("<html><head>");
@@ -92,6 +96,7 @@ public class TicTacToe extends HttpServlet {
 				writer.println("</tr>");
 			}
 			writer.println("</table>");
+			writer.println("<button type=\"submit\" name=\"reset\">Reset</button>");
 			writer.println("</form>");
 			writer.println("</body>");
 			writer.println("</html>");
@@ -99,5 +104,4 @@ public class TicTacToe extends HttpServlet {
 			writer.close();
 		}
 	}
-	
 }

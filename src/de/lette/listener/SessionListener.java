@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
- * @author invalid
  * Atm only for debug purposes
+ * @author invalid
  */
 @WebListener
 public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener{
