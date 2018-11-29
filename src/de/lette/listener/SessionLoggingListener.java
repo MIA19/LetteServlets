@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSessionListener;
  * @author invalid
  */
 @WebListener
-public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener{
+public class SessionLoggingListener implements HttpSessionListener, HttpSessionAttributeListener{
 
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent event) {

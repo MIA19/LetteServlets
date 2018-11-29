@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * TicTacToe Servlet
+ * 
  * @author invalid
  */
 @WebServlet("/TicTacToe")
@@ -23,42 +24,19 @@ public class TicTacToe extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		var session = request.getSession(true);
+		
+		var field = (char[]) session.getAttribute("field");
+		var player = (char) session.getAttribute("player");
+		
+		var names = request.getParameterNames();
+		String name = null;
+		if (names.hasMoreElements())
+			name = names.nextElement();
 
-		if (request.getParameter("reset") != null) {
-			session.removeAttribute("tictactoe");
-		}
-
-		var player = false;
-		if (session.getAttribute("player") == null) {
-			session.setAttribute("player", player);
-		} else {
-			player = (boolean) session.getAttribute("player");
-		}
-
-		var field = new char[3][3];
-		if (session.getAttribute("tictactoe") == null) {
-			session.setAttribute("tictactoe", field);
-		} else {
-			field = (char[][]) session.getAttribute("tictactoe");
-		}
-
-		if (request.getParameter("move") != null) {
-			int move = Integer.parseInt(request.getParameter("move"));
-			int x = move / 3;
-			int y = move % 3;
-
-			if (field[x][y] == '\0') {
-				if (player)
-					field[x][y] = 'X';
-				else
-					field[x][y] = 'O';
-				session.setAttribute("player", !player);
-			} else {
-				System.out.println("Already set");
-			}
-		}
-
-		response.setContentType("text/html");
+		if(name != null)
+			field[Integer.parseInt(name)] = (player == 'O' ? 'X' : 'O');
+		
+		response.setContentType("text/html; charset=UTF-8");
 		printTicTacToe(response.getWriter(), field);
 
 	}
@@ -71,32 +49,31 @@ public class TicTacToe extends HttpServlet {
 	/**
 	 * Prints the TicTacToe field as html
 	 */
-	private void printTicTacToe(PrintWriter writer, char[][] field) {
+	private void printTicTacToe(PrintWriter writer, char[] field) {
 		try {
 			writer.println("<!DOCTYPE html>");
-			writer.println("<html><head>");
-			writer.println("<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+			writer.println("<html>");
 			writer.println("<title>TicTacToe</title></head>");
 			writer.println("<body>");
-			writer.println("<form action = \"TicTacToe\" method = \"POST\">");
+			writer.println("<form>");
 			writer.println("<table>");
-			int count = 0;
-			for (int i = 0; i < field.length; i++) {
+			for (int i = 0; i < 3; i++) {
 				writer.println("<tr>");
-				for (int j = 0; j < field[i].length; j++) {
+				for (int j = 0; j < 3; j++) {
 					writer.println("<td>");
-					writer.print("<button style=\"height:2.5em; width:100%\" type = \"submit\" name=\"move\" value=\"");
-					writer.print(count);
-					writer.print("\">");
-					writer.print(field[i][j]);
-					writer.println("</button>");
+					writer.print("<input style=\"height:2.5em; width:100%\" type = \"submit\" name=\"");
+					writer.print(3 * i + j);
+					writer.print("\"");
+					char actualField = field[3*i+j];
+					if(actualField != ' ') writer.print(" disabled=\"true\"");
+					writer.print(" value=\"");
+					writer.print(actualField);
+					writer.println("\" />");
 					writer.println("</td>");
-					count++;
 				}
 				writer.println("</tr>");
 			}
 			writer.println("</table>");
-			writer.println("<button type=\"submit\" name=\"reset\">Reset</button>");
 			writer.println("</form>");
 			writer.println("</body>");
 			writer.println("</html>");
@@ -104,4 +81,5 @@ public class TicTacToe extends HttpServlet {
 			writer.close();
 		}
 	}
+
 }
