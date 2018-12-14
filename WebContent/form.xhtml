@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Form!</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel for="forename">Forename:</h:outputLabel>
+			<h:inputText value="#{person.forename}" id="forename"></h:inputText>
+
+			<h:outputLabel for="surname">Surname:</h:outputLabel>
+			<h:inputText value="#{person.surname}" id="surname"></h:inputText>
+
+			<h:outputLabel for="color">Age:</h:outputLabel>
+			<h:inputText value="#{person.age}"></h:inputText>
+
+			<h:commandButton action="#{person.submit}" value="Submit"></h:commandButton>
+		</h:panelGrid>
+	</h:form>
+	<h:dataTable value="#{person.list}" var="o">
+		<h:column>
+			<f:facet name="header">Forename</f:facet>
+  				#{o.forename}
+    	</h:column>
+		<h:column>
+			<f:facet name="header">Surname</f:facet>
+  				#{o.surname}
+    	</h:column>
+		<h:column>
+			<f:facet name="header">Age</f:facet>
+  				#{o.age}
+    	</h:column>
+	</h:dataTable>
+</h:body>
+</html>
