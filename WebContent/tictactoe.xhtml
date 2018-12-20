@@ -10,24 +10,24 @@
 		<h:panelGrid columns="1">
 			<h:outputText id="message" value="#{tictactoe.message}" />
 			<h:panelGrid columns="3">
-				<h:commandButton id="feld-0" value="#{tictactoe.field[0]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-1" value="#{tictactoe.field[1]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-2" value="#{tictactoe.field[2]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-3" value="#{tictactoe.field[3]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-4" value="#{tictactoe.field[4]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-5" value="#{tictactoe.field[5]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-6" value="#{tictactoe.field[6]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-7" value="#{tictactoe.field[7]}"
-					actionListener="#{tictactoe.turn}" />
-				<h:commandButton id="feld-8" value="#{tictactoe.field[8]}"
-					actionListener="#{tictactoe.turn}" />
+				<h:commandButton value="#{tictactoe.field[0]}"
+					actionListener="#{tictactoe.turn(0)}" />
+				<h:commandButton value="#{tictactoe.field[1]}"
+					actionListener="#{tictactoe.turn(1)}" />
+				<h:commandButton value="#{tictactoe.field[2]}"
+					actionListener="#{tictactoe.turn(2)}" />
+				<h:commandButton value="#{tictactoe.field[3]}"
+					actionListener="#{tictactoe.turn(3)}" />
+				<h:commandButton value="#{tictactoe.field[4]}"
+					actionListener="#{tictactoe.turn(4)}" />
+				<h:commandButton value="#{tictactoe.field[5]}"
+					actionListener="#{tictactoe.turn(5)}" />
+				<h:commandButton value="#{tictactoe.field[6]}"
+					actionListener="#{tictactoe.turn(6)}" />
+				<h:commandButton value="#{tictactoe.field[7]}"
+					actionListener="#{tictactoe.turn(7)}" />
+				<h:commandButton value="#{tictactoe.field[8]}"
+					actionListener="#{tictactoe.turn(8)}" />
 			</h:panelGrid>
 			<h:commandButton value="Restart" action="#{tictactoe.restart}"/>
 		</h:panelGrid>

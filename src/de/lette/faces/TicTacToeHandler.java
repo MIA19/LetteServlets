@@ -3,7 +3,6 @@ package de.lette.faces;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 
 @Named("tictactoe")
@@ -17,12 +16,11 @@ public class TicTacToeHandler implements Serializable {
 		restart();
 	}
 	
-	public void turn(ActionEvent ae) {
+	public void turn(int index) {
 		
-		int pos = Integer.parseInt(ae.getComponent().getId().split("-")[1]);
-		if(field[pos] == ' ')
+		if(field[index] == ' ')
 		{
-			field[pos] = player;
+			field[index] = player;
 			switchPlayer();
 		}
 	}
