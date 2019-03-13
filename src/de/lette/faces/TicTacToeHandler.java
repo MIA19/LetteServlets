@@ -9,10 +9,11 @@ import javax.inject.Named;
 @SessionScoped
 public class TicTacToeHandler implements Serializable {
 
-	private char player = 'X';
+	private char player;
 	private char[] field;
 	
 	public TicTacToeHandler() {
+		player = 'X';
 		restart();
 	}
 	

@@ -7,16 +7,16 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-@Named("person")
+@Named("personBean")
 @SessionScoped
-public class Person implements Serializable{
+public class PersonBean implements Serializable{
 
-    private List<Person> list;
+    private List<PersonBean> list;
     private String forename;
     private String surname;
     private int age;
     
-	public Person() {
+	public PersonBean() {
 		list = new ArrayList<>();
 	}
 	/**
@@ -59,13 +59,18 @@ public class Person implements Serializable{
     /**
 	 * @return the list
 	 */
-	public List<Person> getList() {
+	public List<PersonBean> getList() {
 		return list;
 	}
-	
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
 	public void submit()
     {
-		Person p = new Person();
+		PersonBean p = new PersonBean();
 		p.setAge(age);
 		p.setForename(forename);
 		p.setSurname(surname);

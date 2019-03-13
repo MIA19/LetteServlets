@@ -9,30 +9,31 @@
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel for="forename">Forename:</h:outputLabel>
-			<h:inputText value="#{person.forename}" id="forename"></h:inputText>
+			<h:inputText value="#{personBean.forename}" id="forename"/>
 
 			<h:outputLabel for="surname">Surname:</h:outputLabel>
-			<h:inputText value="#{person.surname}" id="surname"></h:inputText>
+			<h:inputText value="#{personBean.surname}" id="surname"/>
 
-			<h:outputLabel for="color">Age:</h:outputLabel>
-			<h:inputText value="#{person.age}"></h:inputText>
+			<h:outputLabel for="age">Age:</h:outputLabel>
+			<h:inputText value="#{personBean.age}" id="age"/>
 
-			<h:commandButton action="#{person.submit}" value="Submit"></h:commandButton>
+			<h:commandButton action="#{personBean.submit}" value="Submit"/>
 		</h:panelGrid>
 	</h:form>
-	<h:dataTable value="#{person.list}" var="o">
+	<h:dataTable value="#{personBean.list}" var="o">
 		<h:column>
 			<f:facet name="header">Forename</f:facet>
-  				#{o.forename}
-    	</h:column>
+			<h:outputText value="#{o.forename}"/>
+		</h:column>
 		<h:column>
 			<f:facet name="header">Surname</f:facet>
-  				#{o.surname}
-    	</h:column>
+			<h:outputText value="#{o.surname}"/>
+
+		</h:column>
 		<h:column>
 			<f:facet name="header">Age</f:facet>
-  				#{o.age}
-    	</h:column>
+			<h:outputText value="#{o.age}"/>
+		</h:column>
 	</h:dataTable>
 </h:body>
 </html>

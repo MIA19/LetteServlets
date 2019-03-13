@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 			var userName = new Cookie("user", user);
 			userName.setMaxAge(30*60);
 			response.addCookie(userName);
-			response.sendRedirect("TicTacToe");
+			response.sendRedirect("requestForm.xhtml");
 		}else{
 			var rd = getServletContext().getRequestDispatcher("/login.html");
 			var out= response.getWriter();
